@@ -1,0 +1,96 @@
+Simulating the process of generating a random integer is more difficult than you might think and requires more mathematics than we would like to describe here. Fortunately, since the task of generating random numbers arises in so many applications, Python provides a module called random for generating them. You can think of a module as a “bundle” of related functions. To use the random module, we place the following statement at the top of our file.
+
+import random
+Inside of the random module is a built-in function called randint(1, M) that generates a random integer between 1 and M, inclusively. To call this function, we use
+
+random.randint(1, M)
+Code Challenge (3 points): Write a function RandomMotifs(Dna, k, t) that uses random.randint to choose a random k-mer from each of t different strings Dna, and returns a list of t strings. Then add this function to Motifs.py.
+
+Note: ?The remaining Code Challenges are all based on randomized algorithms.  Because the output of these algorithms depends on randomization, there is no unique answer to each problem, and so we will not provide test datasets.
+
+Sample Input:
+
+3 5
+TTACCTTAAC
+GATGTCTGTC
+ACGGCGTTAG
+CCCTAACGAG
+CGTCAGAGGT
+Sample Output:
+
+TTA
+GTC
+ACG
+ACG
+GAG
+
+
+
+
+
+
+
+
+Code :
+
+
+
+# import Python's 'random' module here
+import random
+# Input:  A list of strings Dna, and integers k and t
+# Output: RandomMotifs(Dna, k, t)
+# HINT:   You might not actually need to use t since t = len(Dna), but you may find it convenient
+
+
+def Count(Motifs):
+    count = {} # initializing the count dictionary
+    # your code here
+    k = len(Motifs[0])
+    for symbol in "ACGT":
+        count[symbol] = []
+        for j in range(k):
+             count[symbol].append(0)
+                
+    t = len(Motifs)
+    for i in range(t):
+        for j in range(k):
+            symbol = Motifs[i][j]
+            count[symbol][j] += 1
+    return count
+def profile(Motifs):
+    t = len(Motifs)
+    k = len(Motifs[0])
+    profile = {}
+    # insert your code here
+    count=Count(Motifs)
+    for symbol in "ACGT":
+        profile[symbol] = []
+        for j in range(k):
+             profile[symbol].append((count[symbol][j])/t)
+    return profile
+
+
+
+def RandomMotifs(Dna, k, t):
+    Profile=profile(Dna)
+    l=[]
+    for s in Dna:
+        r=random.randint(1, k)
+        l.append(ProfileMostProbableKmer(s,r,Profile))
+    return l
+# Insert your ProfileMostProbablePattern(Text, k, Profile) and Pr(Pattern, Profile) functions here.
+def Pr(Text, Profile):
+    i=0
+    p=1
+    for char in Text:
+        p=p*Profile[char][i]
+        i=i+1
+    return p
+def ProfileMostProbableKmer(Text, k, profile):
+    max=Pr(Text[0:k],profile)
+    ms=Text[0:k]
+    for i in range(len(Text)-k+1):
+        if Pr(Text[i:i+k],profile)>max:
+            max=Pr(Text[i:i+k],profile)
+            ms=Text[i:i+k]
+    return ms

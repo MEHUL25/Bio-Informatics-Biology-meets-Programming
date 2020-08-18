@@ -1,0 +1,5 @@
+# First, create a string variable called ori that is equal to the Vibrio cholerae ori. Don't forget to enclose your string in quotes!
+
+# Then, print the length of ori
+ori=input()
+print(len(ori))

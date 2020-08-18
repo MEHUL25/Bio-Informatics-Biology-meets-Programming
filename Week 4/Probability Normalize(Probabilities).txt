@@ -1,0 +1,14 @@
+# Input: A dictionary Probabilities, where keys are k-mers and values are the probabilities of these k-mers (which do not necessarily sum up to 1)
+# Output: A normalized dictionary where the probability of each k-mer was divided by the sum of all k-mers' probabilities
+def Normalize(Probabilities):
+    # your code here
+    s=0
+    for i in Probabilities:
+        s=s+Probabilities[i]
+    for i in Probabilities:
+        Probabilities[i]=Probabilities[i]/s
+    return Probabilities
+
+
+
+

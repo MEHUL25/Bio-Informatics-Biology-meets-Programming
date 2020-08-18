@@ -1,0 +1,14 @@
+# Input:  String Text and profile matrix Profile
+# Output: Pr(Text, Profile)
+def Pr(Text, Profile):
+    i=0
+    p=1
+    for char in Text:
+        p=p*Profile[char][i]
+        i=i+1
+    return p
+    # insert your code here
+
+
+
+

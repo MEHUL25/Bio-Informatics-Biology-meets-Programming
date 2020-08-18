@@ -1,0 +1,86 @@
+Now that we can simulate a weighted die roll over a collection of probabilities of strings, we need to make this function into a subroutine of a larger function that randomly chooses a k-mer from a string Text based on a profile matrix profile.
+
+In other words, after setting the length of text and declaring a blank dictionary,
+
+    n = len(Text)
+    probabilities = {} 
+we range over all possible k-mers in Text, computing the probability of each one and placing this probability into a dictionary.
+
+    for i in range(0,n-k+1):
+        probabilities[Text[i:i+k]] = Pr(Text[i:i+k], profile)
+We then normalize these probabilities using the Normalize(probabilities) subroutine, and then return the result of rolling a weighted die over this dictionary to produce a k-mer.
+
+    probabilities = Normalize(probabilities)
+    return WeightedDie(probabilities)
+Code Challenge (3 points): Assemble this code into a function ProfileGeneratedString(Text, profile, k) that takes a string Text, a profile matrix profile , and an integer k as input.  It should then return a randomly generated k-mer from Text whose probabilities are generated from profile, as described above.  Then add this function to Motifs.py.
+
+Note that the 1 at the beginning of the sample dataset is simply for grading purposes (so ignore it).
+
+Sample Input:
+
+1
+AAACCCAAACCC
+{'A': [0.5, 0.1], 'C': [0.3, 0.2], 'G': [0.2, 0.4], 'T': [0.0, 0.3]}
+2
+Sample Output:
+
+AC
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code : 
+
+
+
+
+# first, import the random package
+import random
+# then, copy Pr, Normalize, and WeightedDie below this line
+from operator import itemgetter
+def WeightedDie(d):
+    ran = random.uniform(0, 1)
+    #print(ran,d)
+    tot = 0
+    for k, v in sorted(d.items(),key=itemgetter(1)):
+        if tot <= ran < v + tot:
+            return k
+        tot += v
+# Input:  A string Text, a profile matrix Profile, and an integer k
+# Output: ProfileGeneratedString(Text, profile, k)
+def Normalize(Probabilities):
+    # your code here
+    s=0
+    for i in Probabilities:
+        s=s+Probabilities[i]
+    for i in Probabilities:
+        Probabilities[i]=Probabilities[i]/s
+    return Probabilities
+
+
+def Pr(Text, Profile):
+    i=0
+    p=1
+    for char in Text:
+        p=p*Profile[char][i]
+        i=i+1
+    return p
+
+
+def ProfileGeneratedString(Text, profile, k):
+    n = len(Text)
+    probabilities = {} 
+    for i in range(0,n-k+1):
+        probabilities[Text[i:i+k]] = Pr(Text[i:i+k], profile)
+    probabilities = Normalize(probabilities)
+    return WeightedDie(probabilities)
+    # your code here

@@ -1,0 +1,15 @@
+# Input:  A DNA string Pattern
+# Output: The complementary string of Pattern (with every nucleotide replaced by its complement).
+def Complement(Pattern):
+    z=""
+    for char in Pattern:
+        if char == 'A':
+            z=z+'T'
+        if char == 'T':
+            z=z+'A'
+        if char == 'C':
+            z=z+'G'
+        if char == 'G':
+            z=z+'C'
+    return z
+    # your code here

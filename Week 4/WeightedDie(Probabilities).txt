@@ -1,0 +1,46 @@
+We now need to simulate rolling a die so that "ccgG" has probability 4/80, "cgGC" has probability 8/80, and so on. We will do so by generating a random number p between 0 and 1. If p is between 0 and 4/80, then it corresponds to "ccgG". If p is between 4/80 and 4/80 + 8/80, then it corresponds to "cgGC", etc.
+
+How can we generate a random number between 0 and 1? In addition to the randint function, Python’s random module also includes a function called uniform(a, b) that generates a random floating point number (i.e., a decimal) between a and b. We can therefore generate our desired random number p by calling random.uniform(0, 1).
+
+Code Challenge (3 points): Generalize this idea by writing a function WeightedDie(Probabilities). This function takes a dictionary Probabilities whose keys are k-mers and whose values are the probabilities of these k-mers. The function should return a randomly chosen k-mer key with respect to the values in Probabilities. Then add this function to Motifs.py.
+
+(Note: the 1 at the beginning of the sample dataset is simply for grading purposes, so please ignore it.)
+
+Sample Input:
+
+1
+0.25 A
+0.25 C
+0.25 G
+0.25 T
+Sample Output:
+
+G
+Write a program, test u
+
+
+
+
+
+
+
+
+
+Code : 
+
+
+
+
+# first, import the random package
+import random
+from operator import itemgetter
+# Input:  A dictionary Probabilities whose keys are k-mers and whose values are the probabilities of these kmers
+# Output: A randomly chosen k-mer with respect to the values in Probabilities
+def WeightedDie(d):
+    ran = random.uniform(0, 1)
+    #print(ran,d)
+    tot = 0
+    for k, v in sorted(d.items(),key=itemgetter(1)):
+        if tot <= ran < v + tot:
+            return k
+        tot += v

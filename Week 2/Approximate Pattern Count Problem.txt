@@ -1,0 +1,28 @@
+# Input:  Strings Pattern and Text, and an integer d
+# Output: The number of times Pattern appears in Text with at most d mismatches
+def ApproximatePatternCount(Pattern, Text, d):
+    count = 0 # initialize count variable
+    for i in range(len(Text)-len(Pattern)+1):
+        if HammingDistance(Text[i:i+len(Pattern)],Pattern)<=d:
+            count=count+1
+    # your code here
+    return count
+
+def HammingDistance(p, q):
+    # your code here
+    count=0
+    j=0
+    for i in range(0,len(p)):
+        if p[j] != q[j]:
+            count=count+1
+        j=j+1
+    return count
+# Insert your Hamming distance function on the following line.
+
+# Insert your HammingDistance function on the following line.
+
+
+### DO NOT MODIFY THE CODE BELOW THIS LINE ###
+import sys
+lines = sys.stdin.read().splitlines()
+print(ApproximatePatternCount(lines[0],lines[1],int(lines[2])))

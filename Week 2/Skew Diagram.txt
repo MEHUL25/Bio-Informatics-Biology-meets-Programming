@@ -1,0 +1,18 @@
+# Input:  A String Genome
+# Output: The skew array of Genome as a list.
+def SkewArray(Genome):
+    skew=[]
+    skew.append(0)
+    n=0
+    for char in Genome:
+        if char == 'C':
+            n=n-1
+            skew.append(n)
+        elif char == 'G':
+            n=n+1
+            skew.append(n)
+        else:
+            skew.append(n)
+            
+    return skew
+    # your code here

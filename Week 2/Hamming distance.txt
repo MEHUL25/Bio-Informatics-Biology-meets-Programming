@@ -1,0 +1,11 @@
+# Input:  Two strings p and q
+# Output: An integer value representing the Hamming Distance between p and q.
+def HammingDistance(p, q):
+    # your code here
+    count=0
+    j=0
+    for i in range(0,len(p)):
+        if p[j] != q[j]:
+            count=count+1
+        j=j+1
+    return count

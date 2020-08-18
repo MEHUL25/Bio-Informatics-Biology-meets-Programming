@@ -1,0 +1,14 @@
+sequence = "GATCCAGATCCCCATAC"
+twoMers = {}
+i = 0
+for i in range(len(sequence)-2+1) :
+
+    current = sequence[i: i+2]
+    print(current)
+    if current in twoMers:
+        count = twoMers.get(current)
+        twoMers[current] = count + 1
+    else:
+        twoMers[current] = 1
+       
+print(twoMers)

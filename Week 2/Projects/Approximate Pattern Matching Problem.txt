@@ -1,0 +1,21 @@
+# Input:  Strings Pattern and Text along with an integer d
+# Output: A list containing all starting positions where Pattern appears
+# as a substring of Text with at most d mismatches
+def ApproximatePatternMatching(Text, Pattern, d):
+    positions = [] # initializing list of positions
+    for i in range(len(Text)-len(Pattern)+1):
+        if HammingDistance(Text[i:i+len(Pattern)],Pattern)<=d:
+            positions.append(i)
+    # your code here
+    return positions
+
+def HammingDistance(p, q):
+    # your code here
+    count=0
+    j=0
+    for i in range(0,len(p)):
+        if p[j] != q[j]:
+            count=count+1
+        j=j+1
+    return count
+# Insert your Hamming distance function on the following line.

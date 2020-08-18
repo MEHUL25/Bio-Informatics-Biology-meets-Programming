@@ -1,0 +1,8 @@
+# Input:  A string Pattern
+# Output: The reverse of Pattern
+def Reverse(Pattern):
+    z=""
+    for char in Pattern:
+        z=char+z
+    return z
+    # your code here

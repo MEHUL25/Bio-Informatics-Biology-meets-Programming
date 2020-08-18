@@ -1,0 +1,68 @@
+Taking the Profile-most probable 4-mer from each row of Dna produces the following 4-mers (shown in red):
+
+
+
+
+Code Challenge (2 points): Write a function Motifs(Profile, Dna) that takes a profile matrix Profile corresponding to a list of strings Dna as input and returns a list of the Profile-most probable k-mers in each string from Dna. Then add this function to Motifs.py.
+
+Click here for this problem's test datasets.
+
+Sample Input:
+
+0.8 0.0 0.0 0.2
+0.0 0.6 0.2 0.0
+0.2 0.2 0.8 0.0
+0.0 0.2 0.0 0.8
+TTACCTTAAC
+GATGTCTGTC
+ACGGCGTTAG
+CCCTAACGAG
+CGTCAGAGGT
+Sample Output:
+
+ACCT
+ATGT
+GCGT
+ACGA
+AGGT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Input:  A profile matrix Profile and a list of strings Dna
+# Output: Motifs(Profile, Dna)
+def Motifs(Profile, Dna):
+    # insert your code here
+    l=[]
+    for s in Dna:
+        l.append(ProfileMostProbableKmer(s,4,Profile))
+    return l
+# Insert your ProfileMostProbablePattern(Text, k, Profile) and Pr(Pattern, Profile) functions here.
+def Pr(Text, Profile):
+    i=0
+    p=1
+    for char in Text:
+        p=p*Profile[char][i]
+        i=i+1
+    return p
+def ProfileMostProbableKmer(Text, k, profile):
+    max=Pr(Text[0:k],profile)
+    ms=Text[0:k]
+    for i in range(len(Text)-k+1):
+        if Pr(Text[i:i+k],profile)>max:
+            max=Pr(Text[i:i+k],profile)
+            ms=Text[i:i+k]
+    return ms

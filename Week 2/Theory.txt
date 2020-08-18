@@ -1,0 +1,13 @@
+We now make a final attempt to find DnaA boxes in the region of the E. coli genome hypothesized by the minimum skew as ori. Although the minimum of the skew diagram for E. coli is found at position 3923620, we should not assume that its ori is found exactly at this position due to random fluctuations in the skew. To remedy this issue, we could choose a larger window size (e.g., 1000), but expanding the window introduces the risk that we may bring in other clumped 9-mers that do not represent DnaA boxes but appear in this window more often than the true DnaA box. It makes more sense to try a small window either starting, ending, or centered at the position of minimum skew.
+
+Let’s cross our fingers and identify the most frequent 9-mers (with 1 mismatch) within a window of length 500 starting at position 3923620 of the E. coli genome. Bingo! The experimentally confirmed DnaA box in E. coli (TTATCCACA) is indeed a most frequent 9-mer, along with its reverse complement TGTGGATAA (with 1 mismatch):
+
+aatgatgatgacgtcaaaaggatccggataaaacatggtgattgcctcgcataacgcggt atgaaaatggattgaagcccgggccgtggattctactcaactttgtcggcttgagaaaga cctgggatcctgggtattaaaaagaagatctatttatttagagatctgttctattgtgat ctcttattaggatcgcactgcccTGTGGATAAcaaggatccggcttttaagatcaacaac ctggaaaggatcattaactgtgaatgatcggtgatcctggaccgtataagctgggatcag aatgaggggTTATACACAactcaaaaactgaacaacagttgttcTTTGGATAActaccgg ttgatccaagcttcctgacagagTTATCCACAgtagatcgcacgatctgtatacttattt gagtaaattaacccacgatcccagccattcttctgccggatcttccggaatgtcgtgatc
+aagaatgttgatcttcagtg                                        
+
+You will notice that we highlighted an interior interval of this sequence with darker text. This region is the experimentally verified ori of E. coli, which starts 37 nucleotides after position 3923620, where the skew reaches its minimum value.
+
+
+
+
+Thus, the moral of this chapter is that even though computational analysis can be powerful, bioinformaticians should collaborate with biologists to verify their predictions. 
